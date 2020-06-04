@@ -1,0 +1,43 @@
+Python的Django框架中forms表单类的使用方法详解 
+
+用户表单是Web端的一项基本功能,大而全的Django框架中自然带有现成的基础form对象,本文就Python的Django框架中forms表单类的使用方法详解。
+
+=====================================================================================
+Form表单的功能
+自动生成HTML表单元素
+检查表单数据的合法性
+如果验证错误，重新显示表单（数据不会重置）
+数据类型转换（字符类型的数据转换成相应的Python类型）
+============================================================================================
+Form相关的对象包括
+Widget：用来渲染成HTML元素的工具，如：forms.Textarea对应HTML中的<textarea>标签
+Field：Form对象中的一个字段，如：EmailField表示email字段，如果这个字段不是有效的email格式，就会产生错误。
+Form：一系列Field对象的集合，负责验证和显示HTML元素
+Form Media：用来渲染表单的CSS和JavaScript资源。
+======================================================================
+Form Media：用来渲染表单的CSS和JavaScript资源。
+Form Objects
+Form对象封装了一系列Field和验证规则，Form类都必须直接或间接继承自django.forms.Form，定义Form有两种方式:
+方法一：直接继承Form
+
+from django import forms
+class ContactForm(forms.Form):
+ subject = forms.CharField(max_length=100,label='主题')
+ message = form.CharField(widget=forms.TextArea)
+ sender = form.EmailField()
+ cc_myself = forms.BooleanField(required=False)
+==================================================================
+
+方法二：结合Model，继承django.forms.ModelForm
+
+#models.py
+class Contact(models.Model):
+ title = models.CharField(max_length=30)
+ content = models.CharField(max_length=20)
+ 
+#form.py
+class ConotactForm(ModelForm):
+ class Meta:
+ model = Contact
+ field = ('title','content') #只显示model中指定的字段
+===============================================================

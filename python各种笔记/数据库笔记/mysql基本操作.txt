@@ -1,0 +1,145 @@
+=============================================================下载mysql -----centos里面是MariaDB：	
+	1 ：   vi/etc/yum.repos.d/MariaDB.repo
+	2 ： [mariadb]
+	         name = MariaDB
+    	          baseurl = http://yum.mariadb.org/10.1/centos7-amd64
+	               gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB gpgcheck=1
+	3：          yum install MariaDB-server MariaDB -client-y
+	4：          启动 systemctl start mariadb
+		停止    systemctl stop mariadb
+		重启   systemctl restart mariadb
+		设置开机启动   systemctl restart mariadb
+	5             执行初始化  mysql_server_installation
+		开始密码为空。直接回车，设置密码  然后一直  y  直到结束	
+	6：登陆MySQL
+	 mysql -uroot -p        （-u  用户名     -p 回车     写入密码登陆） 	
+=============================================================
+MySQL  操作
+exit                        退出数据库
+show databases；  查看有哪些数据库（查看注意些复数）
+create database db2；        创建数据库
+use db1;                    切换数据库 
+desc                      表明；    查看表结构  
+===========================================================
+
+1. 操作文件夹（库）
+   增：create database db1 charset utf8;
+   查：show databases;
+   改：alter database db1 charset latin1;
+   删除: drop database db1;
+
+2. 操作文件（表）
+   先切换到文件夹下：use db1
+   增：create table t1(id int,name char);
+   查：show tables;
+   改：alter table t1 modify name char(3);
+      alter table t1 change name name1 char(2);
+   删：drop table t1;
+表中列删除：
+  删除单列alter table stu drop username;
+  删除多列alter table stu drop age1,drop age2;
+  修改列定义(类型),位置alter table t1 modify  name char(3) first;  改到了表最前面：
+alter table t1 modify  age tinyint;(假设原来是int)
+修改列定义和列名称：
+alter table t1 change name  name1 char(2) ;
+3. 操作文件中的内容（记录）
+   增：insert into t1 values(1,'egon1'),(2,'egon2'),(3,'egon3');
+   查：select * from t1;
+   改：update t1 set name='sb' where id=2;
+   删：delete from t1 where id=1;
+   清空表：
+       delete from t1; #如果有自增id，新增的数据，仍然是以删除前的最后一样作为起始。
+       truncate table t1;数据量大，删除速度比上一条快，且直接从零开始，
+*auto_increment 表示：自增
+*primary key 表示：约束（不能重复且不能为空）；加速查找
+=============================================================mysql权限相关  
+   创建普通用户：
+   create user “李梁”@“%” identified by "123”；
+  登陆普通用户 ： mysql -uliliang -p
+
+
+=============================================================
+grant  权限有 ：
+create  授权增加alterselect ，delete，update，drop，insert  等权限
+授权权限:  grant  权限 on liliang.* liliang@“%”;
+  字符串：   (插入数据记得加“”)
+char (定长)     后面的数字表示字符数
+varchar （变长)
+字段的值只能在给定范围中选择，如单选框，多选框枚举型 和 集合类型
+enum   单选	只能在给定的范围内选一个值，如性别 sex 男male/女female
+set  多选 在给定的范围内可以选择一个或一个以上的值（爱好1,爱好2,爱好3...）
+ flush privileges；刷新权限
+MySQL支持多种类型，大致可以分为三类：
+数值、日期/时间和字符串(字符)类型。
+数值： 整型    int   tinyint  bigint   smallint                
+小数    float          单精度浮点    保留小数点后的7位    工资需要小数                      double      双精度浮点      14个         
+无符号:都是正数
+日期：
+作用：用户注册时间，文章发布时间，入职时间，出生时间，过期时间 t
+ime     13:14:15 
+date     1901-12-13 
+year     2011 
+datetime    1901-12-13   13:14:15   
+============================================================== 完整性约束：
+not null ：#标识该字段不能为空
+default： #为该字段设置默认值
+unique key： #标识该字段的值是唯一的，不能重复
+primary key ： #标识该字段为该表的主键，主动为notnull,确保记录的唯一性
+auto_increment：#标识该字段的值自动增长（整数类型，而且为主键）
+foreign key：#标识该字段为该表的外键
+unsigned:  无符号
+zerofill：用零0填充
+=============================================================
+where约束，
+1where子句中可以使用
+1.比较运算符：>、<、>=、<=、!=
+2.between 80 and 100 ：值在80到100之间
+3.in(80,90,100)值是80或90或100
+4.like 'xiaopat': pat可以是%或者_。%小时任意多字符，_表示一个字符 x%,%a% ,%t
+5.逻辑运算符：在多个条件直接可以使用逻辑运算符 and or not
+1：select *  from 宝宝  where id >5;
+4:   select * 宝宝 from  where name like"b%"; 筛选 
+2：select * from 宝宝  where age bentween 17 and 19;  筛选 17之间的19岁的人
+select * from 宝宝  where age in (17,19)；筛选17或者19岁的人
+select age1,group_concat(name),max(age1),count(age1) from c02 group by age1; 用来找出分数的个数还有分别是
+-============================================================
+select salary, count(salary) from cc01 where salary>10000;   用来求出salary 大于10000的总人数书；
+ select count(id) from cc01 where name like "%a%" group by post;
+筛选每个部门 name 含有%a% 的个数
+select post, count(id), group_concat(name) from cc01 where id >50 group by post order by salary desc limit 3;
+select id,min(salary) from cc01 group by post having count(id)>2;=====================================================
+order by 查询排序
+	select * from cc01 order by age;  默认升序；
+	select * from cc01 order by age asc ; 升序
+	select * from cc01 order by age desc; 降序；
+=========================================================
+题 select class。count（id） from liliang group by id；
+查找每个班的平均成绩select group_concat(name) ,avg(score) from liliang group by class
+查找平均成绩 select avg(score) from liliang;
+年龄小于18岁 且成绩大于70分的同学信息select * from liliang where age<18 and score>80;
+============================================================
+重点中的重点：关键字的执行优先级
+1   from
+2   where
+3   group by
+4   聚合函数（max(id)等）
+5   having
+6   select
+7   distinct
+8   order by
+9   limit
+===========================================================
+max()求最大值
+min()求最小值
+avg()求平均值
+sum() 求和
+count() 求总个数
+===========================================================
+多表查询：
+内连接  select * from department inner join employee on department.id=employee.dep_id;
+（左右连接都是外连接）：
+左连接select * from department left join employee on department.id=employee.dep_id;
+右连接 select * from department  join employee on department.id=employee.dep_id;
+准备工作 ：准备两张表，部门表（department）.员工表(employee)
+筛选aa姓名所在部门：
+select 

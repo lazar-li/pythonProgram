@@ -1,0 +1,21 @@
+				基本语法
+
+
+############################################
+/                   子节点
+//                  根节点
+nodename            节点                   //input
+@attrib             属性                   //input[@type]
+.                   当前节点                //input/.         //input[@type='submit']/.
+..                  父节点                 //input/..        //input[@type='submit']/..
+[]                  匹配元素下标            //input[1]        //input[@type='submit'][1]
+last()              最后一个下标            //input[last()]   //input[last()-1]  
+position()          当前下标               //input[position()<3]
+*                   任何元素               //form[@id='form']/*
+@*                  任何有属性的元素        //form[@*] 
+
+运算符
+||                  多个xpath路径          //form | //input              
++ - * div mod       数学计算
+> = < != >= <=      条件表达式             //input[@type='hidden'][@value=8]
+or and              逻辑表达式             //input[@name='ie' or @name='f']
