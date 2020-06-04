@@ -1,0 +1,22 @@
+容器三大基本概念
+镜像 image
+容器 container
+仓库 repository
+==========================================================
+docker常用命令
+docker pull centos #获取新的centos镜像
+docker search nginx #搜索nginx镜像
+docker images(或docker image ls)#列出所有本级镜像
+docker run id(前三位)
+docker ps -a  查看所有运行过的容器记录
+docker run -it ubuntu    交互式启动  
+docker rm id (容器ID前三位)
+docker rmi id (镜像ID前三位)
+构建镜像
+1.通过commit修改镜像
+2.编写dockerfile
+docker pull ubuntu  乌班图镜像
+docker ps 查看正在运行的程序
+docker ps -a  检查运行过的
+docker commit 92929e7cf444 centos1  修改 镜像
+docker run -d centos /bin/sh -c "while true;do echo hello 1902ccccc  centos; sleep 1;done"  监听

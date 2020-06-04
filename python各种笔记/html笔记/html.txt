@@ -1,0 +1,74 @@
+html标题标签：<h1>、<h2>、<h3>、<h4>、<h5>、<h6>
+html段落标签:
+	<p>标签：定义一个文本段落，一个段落含有默认的上下间距，段落之间会用这种默认间距隔开
+html换行标签:
+	代码中成段的文字，直接在代码中回车换行，在渲染成网页时候不认这种换行，如果真想换行，可以在代码的段落中插入<br />来强制换行\
+html表单：
+	1.<form>标签 定义整体的表单区域
+	action属性 定义表单数据提交地址
+	method属性 定义表单提交的方式，一般有“get”方式和“post”方式
+	2.<label>标签 为表单元素定义文字标注
+	3.<input>标签 定义通用的表单元素
+type属性：
+type="text" 定义单行文本输入框
+type="password" 定义密码输入框
+type="radio" 定义单选框
+type="checkbox" 定义复选框
+type="file" 定义上传文件
+type="submit" 定义提交按钮
+type="reset" 定义重置按钮
+type="button" 定义一个普通按钮
+type="image" 定义图片作为提交按钮，用src属性定义图片地址
+type="hidden" 定义一个隐藏的表单域，用来存储值
+value属性 定义表单元素的值
+name属性 定义表单元素的名称，此名称是提交数据时的键名
+4<textarea>标签 定义多行文本输入框
+<select>标签 定义下拉表单元素
+<option>标签 与<select>标签配合，定义下拉表单元素中的选项
+**************************************************************************************************************
+css
+olor 设置文字的颜色，如： color:red;
+
+font-size 设置文字的大小，如：font-size:12px;
+
+font-family 设置文字的字体，如：font-family:'微软雅黑';
+
+font-style 设置字体是否倾斜，如：font-style:'normal'; 设置不倾斜，font-style:'italic';设置文字倾斜
+
+font-weight 设置文字是否加粗，如：font-weight:bold; 设置加粗 font-weight:normal 设置不加粗
+
+line-height 设置文字的行高，设置行高相当于在每行文字的上下同时加间距， 如：line-height:24px; 行高示例图片
+
+font 同时设置文字的几个属性，写的顺序有兼容问题，建议按照如下顺序写： font：是否加粗 字号/行高 字体；如： font:normal 12px/36px '微软雅黑';
+
+text-decoration 设置文字的下划线，如：text-decoration:none; 将文字下划线去掉
+
+text-indent 设置文字首行缩进，如：text-indent:24px; 设置文字首行缩进24px 行高示例图片
+
+text-align 设置文字水平对齐方式，如text-align:center 设置文字水平居中
+========================================================================
+ss页面引入方法：
+1、外联式：通过link标签，链接到外部样式表到页面中。
+
+<link rel="stylesheet" type="text/css" href="css/main.css">
+2、嵌入式：通过style标签，在网页上创建嵌入的样式表。
+
+<style type="text/css">
+    div{ width:100px; height:100px; color:red }
+    ......
+</style>
+3、内联式：通过标签的style属性，在标签上直接写样式。
+
+<div style="width:100px; height:100px; color:red ">......</div>
+===========================================================================
+加边框写法
+border-top-color:red;    /* 设置顶部边框颜色为红色 */  
+border-top-width:10px;   /* 设置顶部边框粗细为10px */   
+border-top-style:solid;  /* 设置顶部边框的线性为实线，常用的有：solid(实线)  
+  dashed(虚线)  dotted(点线); */
+   三局简写
+border-top:10px solid red;
+四句简写：
+border:10px solid red;
+===================================================
+overflow：hidden  溢出隐藏

@@ -1,0 +1,69 @@
+以点开头：
+.help
+.exit
+.quit
+.tables   查看当前数据库文件下有哪些表
+.schema 表名     //查看表的结构
+9、sql命令：以；结尾
+1、新建表格：
+create table <table_name> (f1 type1,f2 type2);
+create table stu (name char[20],age int)；
+2、删除表格
+drop table <table_name>;
+drop table student;
+3、添加数据
+insert into <table_name> values (value1,…);
+insert into stu values (“zhangsan”,100);
+4、查询数据
+select * from <table_name>;
+select * from stu;
+select * from <table_name> where 表达式；
+select * from stu where age<200;
+sqlite> select * from stu where name=“zhangsan”;
+select * from stu where age<200 and name=“zhangsan”;
+5、更改数据
+update <table_name> set <f1=value1>,<f2=value2> where 表达式；
+update stu set age=20 where name=“lisi”;
+6、删除数据
+delete from <table_name> where 表达式；
+delete from stu where age>80;
+10、函数控制
+int sqlite3_open(char *path,sqlite3 **db);
+打开数据库，没有则创建；
+path：数据库文件路径
+db : 指向句柄的指针。
+返回值：成功返回SQLITE_OK
+使用：
+sqlite3 *mydb;
+sqlite3_open("./1.db",&mydb);
+int sqlite3_close(sqlite3 *db);
+关闭数据库；
+使用：
+sqlite3_close(mydb);
+int sqlite3_exec(sqlite3 *db,char *sql,int (*callback)(void *arg,int col,char **str,char **name),void *arg,char **errmsg);
+执行一条sql语句；
+db:句柄
+sql:要执行的sql语句
+callback：函数指针，只有查询命令时调用
+arg:传进去的参数
+errmsg:存放错误信息
+返回值：成功返回SQLITE_OK
+int (*callback)(void *arg,int col,char **str,char **name)
+callback : 函数地址
+arg : 传进来的参数
+col : 总列数
+str : 存放查询到的一组信息
+name : 表头
+练习：
+建一个数据库文件，建一个表格,往表格存放数据。通过命令控制验证。。
+建一个数据库，建一个表，输入3个学生信息，查询李四的信息
+总结：
+头文件<sqlite3.h>
+编译时加上-lsqlite3
+回调函数必须return；
+“”前要加转移符号；
+在此执行文件先删除之前的数据库，因为不能建同名的表。也可以改表名或create table if not exists stu ();
+当数据库执行一条查询命令的时候，他在表格中查找满足条件的一组数据，当查找到一组数据后，就把查到的一组数据存放在回调函数的str
+中，执行一遍回调函数。接着再次查询，重复以上步骤。。所以，回调函数是查询到一组符合条件的数据就调用一次。。
+查询到查询不到都会返回宏SOLITE_OK，只有出错：例如函数没有返回等才不会返回
+————————————————

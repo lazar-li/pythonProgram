@@ -1,0 +1,64 @@
+利用Tab，自动路径补全；
+利用Ctrl+T建立新页签；利用Ctrl+W关闭页签;
+利用Ctrl+Tab切换页签;
+Alt+F4：关闭所有页签
+Alt+Shift+1：开启cmd.exe
+Alt+Shift+2：开启powershell.exe
+Alt+Shift+3：开启powershell.exe (系统管理员权限)
+Ctrl+1：快速切换到第1个页签
+Ctrl+n：快速切换到第n个页签( n值无上限)
+Alt + enter： 切换到全屏状态；
+Ctr+r 历史命令搜索
+
+
+推出虚拟环境deactivate
+
+----------------------------------------------------------------------
+编辑器：vscode，需要提前安装的插件有：Chinese（汉化），Python（解析器）
+
+Git && GitHub账号
+
+命令行增强工具Cmder 视频地址：
+
+二、Git的使用
+查看有没有安装git：cmd中输入 git --version
+
+git全局设置：git config --global user.name "Bruce"
+
+git config --global user.email "XXX@qq.com"
+
+初始化本地仓库 git init
+
+新建 .gitignore文件
+
+*.pyc
+*~
+__pycache__
+.vscode
+本地仓库和远程仓库关联
+检查是否已经创建了SSH密钥 cat ~/.ssh/id_rsa.pub
+如果上一步显示“No such file or directory”，这说明之前你没有生成过这个ssh密钥，需要先生成，使用ssh-keygen，不管提示任何东西，一路enter。
+id_rsa 是私钥，一定不能泄露出去。id_rsa.pub是公钥，用于身份认证
+指定远程仓库地址 git remote add origin git@github.com:lazar-li/hmsc.git
+三、安装虚拟环境
+pip+virtualenv+requirements.txt
+
+python3自带的venv模块
+
+Pipenv模块
+
+本节课采用第二种
+python -m venv "虚拟环境名称"
+
+激活虚拟环境 windows上 : env\Scripts\activate Mac上: . env/bin/activate
+
+widnows上vscode的终端中激活：. env\\Scripts\\activate
+
+第一次提交
+git status 查看flaskweb文件夹下有哪些文件发生了变化
+
+git add . 追踪变化的文件
+
+git commit -m "第一次提交，项目初始化完成" 提交到本地仓库
+
+git push -u origin master "-u"参数会将推送到目标仓库和默认分支

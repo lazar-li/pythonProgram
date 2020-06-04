@@ -1,0 +1,20 @@
+﻿AIPcaozuo
+python manage.py shell
+from app.models import Person
+存入数据
+Person.objects.create(name=“zyy", age=18)
+查看数据Person.objects.all()
+======================================
+完善模型
+在models中添加代码:
+def __str__(self):
+    return self.name
+name 和 age 等字段中不能有 __（双下划线，因为在Django QuerySet API中有特殊含义）
+也不能有Python中的关键字，name 是合法的，student_name 也合法，但是student__name不合法，try, class, continue 也不合法，因为它是Python的关键字
+=====================================
+新建一个对象的方法
+1.Person.objects.create(name=name,age=age)
+2.p = Person(name="WZ", age=23)    p.save()
+3.p = Person()    p.age = 23    p.save()
+4.Person.objects.get_or_create(name="WZT", age=23)
+这种方法是防止重复很好的方法，但是速度要相对慢些，返回一个元组，第一个为Person对象，第二个为True或False, 新建时返回的是True, 已经存在时返回False.
